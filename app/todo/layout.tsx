@@ -3,32 +3,15 @@ import React, { useState } from "react";
 
 import { FiMenu, FiUser } from "react-icons/fi";
 
+import Sidebar from "./sidebar";
+
 export default function TodoAppLayout({children}: {children: React.ReactNode}){
     const [isSidebarVisible, setSidebarVisible] = useState(false)
 
     return (
         <div className="flex flex-row">
             {/*  sidebar */}
-            { isSidebarVisible && <div className="p-2">
-                <div className="bg-yellow-200 flex flex-1">
-                    <p>User data</p>
-                </div>
-                {/*  sidebar menu */}
-                <div className="flex flex-col">
-                    <button type="button">
-                        Home
-                    </button>
-                    
-                    <button type="button">
-                        Login
-                    </button>
-
-                    <button type="button">
-                        Log-out
-                    </button>
-                </div>
-            </div>
-            }
+            { isSidebarVisible && <Sidebar />}
             <div className="flex flex-col flex-grow">
                 {/* Header */}
                 <div className="flex flex-row px-2 py-1 items-center">
