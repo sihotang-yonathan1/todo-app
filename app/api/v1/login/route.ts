@@ -23,6 +23,7 @@ export async function POST(request: NextRequest){
     let conn;
     try {
         conn = await pool.getConnection()
+        // TODO: hash password
         let result = await conn.query(`
             SELECT id, username FROM user_cred
             WHERE username = ? AND password = ?
@@ -30,7 +31,7 @@ export async function POST(request: NextRequest){
             request_json['username'],
             request_json['password']
         ])
-        response = new NextResponse(result)
+        response = new NextResponse(JSON.stringify(result[0]))
         await conn.end()
     }
     catch (err){
@@ -60,7 +61,7 @@ export async function PUT(request: NextRequest){
             request_json['username'],
             request_json['password']
         ])
-        response = new NextResponse(result)
+        response = new NextResponse(JSON.stringify(result[0]))
         conn.end()
     }
     catch (err){
