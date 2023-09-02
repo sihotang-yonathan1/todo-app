@@ -125,7 +125,7 @@ export default function TodoAppPage(){
             </div>
 
             <div className="flex-row flex justify-center pt-1 pb-2">
-                <p>You have {taskList.length} {taskList.length > 1 ? "tasks": "task"}  to do</p>
+                <p>You have <span className="text-red-400">{taskList.length}</span> {taskList.length > 1 ? "tasks": "task"}  to do</p>
             </div>
 
             {taskList.length > 0 && (
