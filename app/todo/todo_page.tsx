@@ -3,10 +3,10 @@
 import { useState } from "react"
 import { FiEdit, FiCheck ,FiTrash2, FiPlus } from "react-icons/fi";
 
-function TaskContainer({name, id, deleteFunct}: {name: string, id: number, deleteFunct: any}){
+function TaskContainer({name, id, created_time, deleteFunct}: {name: string, id: number, created_time: Date, deleteFunct: any}){
     const [taskName, setTaskname] = useState(name)
     const [isEditMode, setEditMode] = useState(false)
-    
+
     function handleTaskNameEdit(event: any){
         setTaskname(event.target.value)
     }
@@ -26,6 +26,9 @@ function TaskContainer({name, id, deleteFunct}: {name: string, id: number, delet
                     className="disabled:bg-cyan-300"
                     onChange={handleTaskNameEdit}
                 />
+                <div>
+                    <p className="text-xs">{created_time.getTime()}</p>
+                </div>
             </div>
 
             {/* Action */}
@@ -58,7 +61,8 @@ function TaskContainer({name, id, deleteFunct}: {name: string, id: number, delet
 
 type TaskData = {
     'name': string,
-    'id': number
+    'id': number,
+    'created_time': Date
 }
 
 export default function TodoAppPage(){
@@ -69,7 +73,8 @@ export default function TodoAppPage(){
         if (currentTask){
             setTaskList(task => [...task, {
                 'name': currentTask,
-                'id': task.length
+                'id': task.length,
+                'created_time': new Date()
             }])
             setCurrentTask("")
         }
@@ -141,6 +146,7 @@ export default function TodoAppPage(){
                             name={data.name} 
                             key={data.id}
                             id={data.id}
+                            created_time={data.created_time}
                             deleteFunct={handleDeleteSingleTask}
                         />
                     ))}
