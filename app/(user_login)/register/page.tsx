@@ -34,7 +34,7 @@ export default function LoginPage(){
             {/* Pre border */}
             <div className="border-b-2">
                 <div className="flex flex-col">
-                    <p className="font-semibold text-center">Sign-In</p>
+                    <p className="font-semibold text-center">Sign-Up</p>
                 </div>
 
                 {/* Username */}
