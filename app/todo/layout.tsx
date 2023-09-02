@@ -32,6 +32,7 @@ export default function TodoAppLayout({children}: {children: React.ReactNode}){
             <div className="flex flex-col flex-grow">
                 {/* Header */}
                 <div className="flex flex-row px-2 py-1 items-center">
+
                     {/* Left */}
                     <div className="flex flex-row">
                         {/* TODO: open sidebar if clicked */}
@@ -44,10 +45,13 @@ export default function TodoAppLayout({children}: {children: React.ReactNode}){
                     </div>
 
                     {/* Right */}
-                    <div className="ml-auto bg-slate-500 rounded-full p-1">
-                        {/* TODO: change icon to user avatar if available */}
-                        <FiUser color="#efefef"/>
+                    <div className="ml-auto">
+                        <button className=" bg-slate-500 rounded-full p-1">
+                            {/* TODO: change icon to user avatar if available */}
+                            <FiUser color="#efefef"/>
+                        </button>
                     </div>
+
                 </div>
                 {/* Content Container */}
                 <div className="bg-slate-300 min-h-screen flex flex-col items-center justify-center">
