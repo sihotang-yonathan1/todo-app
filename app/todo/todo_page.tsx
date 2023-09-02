@@ -29,7 +29,7 @@ function TaskContainer({name, id, deleteFunct}: {name: string, id: number, delet
             </div>
 
             {/* Action */}
-            <div className="flex flex-row">
+            <div className="flex flex-row mb-1">
                 {/* Delete */}
                 {!isEditMode &&
                     <div className="rounded border-2 p-2 mx-2 bg-gray-500">
