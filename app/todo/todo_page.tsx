@@ -124,14 +124,15 @@ export default function TodoAppPage(){
                 </div>
             </div>
 
-            <div className="flex-row flex justify-center py-1">
+            <div className="flex-row flex justify-center pt-1 pb-2">
                 <p>You have {taskList.length} {taskList.length > 1 ? "tasks": "task"}  to do</p>
             </div>
 
+            {taskList.length > 0 && (
             <div className="px-3 py-2 my-2 mx-2 bg-cyan-300">
-                { taskList.length > 0 && <div>
+                <div>
                     <p className="underline font-bold">Task List</p>
-                </div>}
+                </div>
                 {/* Task List Container */}
                 <div>
                     {/* TODO: get data from database */}
@@ -145,6 +146,7 @@ export default function TodoAppPage(){
                     ))}
                 </div>
             </div>
+            )}
 
             <div className="flex flex-row justify-center mb-2">
                 <button
