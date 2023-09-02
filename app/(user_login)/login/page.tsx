@@ -3,12 +3,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
-
-// TODO: set all config in one file
-const API_CONFIG = {
-    'host': 'localhost',
-    'port': 3000
-}
+import { API_CONFIG } from "../../config/config";
 
 export default function LoginPage(){
     const [user_cred, setUserCredential] = useState({

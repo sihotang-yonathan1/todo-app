@@ -3,11 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { FiEyeOff, FiEye } from "react-icons/fi";
-
-const API_CONFIG = {
-    'host': 'localhost',
-    'port': 3000
-}
+import { API_CONFIG } from "../../config/config";
 
 export default function LoginPage(){
     const [user_data, setUserData] = useState({
