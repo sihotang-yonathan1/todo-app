@@ -15,6 +15,7 @@ export default function LoginPage(){
         'is_loading': true,
         'get_error': false
     })
+    const [userId, setUserId] = useState(null)
 
     function handleLogin(event: any){
         fetch(`http://${API_CONFIG.host}:${API_CONFIG.port}/api/v1/login`, {
@@ -30,6 +31,7 @@ export default function LoginPage(){
             return data.json()
         })
             .then(res =>{
+                setUserId(res?.id)
                 setLoginStatus({...loginStatus, 'is_authenticated': true})
             } )
         .catch (err => {
