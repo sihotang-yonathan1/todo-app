@@ -23,7 +23,7 @@ function TaskContainer({name, id, deleteFunct}: {name: string, id: number, delet
                     type="text"
                     value={taskName}
                     disabled={!isEditMode}
-                    className="disabled:bg-slate-100"
+                    className="disabled:bg-cyan-300"
                     onChange={handleTaskNameEdit}
                 />
             </div>
@@ -124,17 +124,26 @@ export default function TodoAppPage(){
                 </div>
             </div>
 
-            {/* Task List Container */}
-            <div className="px-3 py-2 my-2 mx-2">
-                {/* TODO: get data from database */}
-                {taskList.map(data => (
-                    <TaskContainer 
-                        name={data.name} 
-                        key={data.id}
-                        id={data.id}
-                        deleteFunct={handleDeleteSingleTask}
-                    />
-                ))}
+            <div className="flex-row flex justify-center py-1">
+                <p>You have {taskList.length} {taskList.length > 1 ? "tasks": "task"}  to do</p>
+            </div>
+
+            <div className="px-3 py-2 my-2 mx-2 bg-cyan-300">
+                { taskList.length > 0 && <div>
+                    <p className="underline font-bold">Task List</p>
+                </div>}
+                {/* Task List Container */}
+                <div>
+                    {/* TODO: get data from database */}
+                    {taskList.map(data => (
+                        <TaskContainer 
+                            name={data.name} 
+                            key={data.id}
+                            id={data.id}
+                            deleteFunct={handleDeleteSingleTask}
+                        />
+                    ))}
+                </div>
             </div>
 
             <div className="flex flex-row justify-center mb-2">
