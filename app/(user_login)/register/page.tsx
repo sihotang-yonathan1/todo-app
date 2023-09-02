@@ -6,7 +6,7 @@ import { FiEyeOff, FiEye } from "react-icons/fi";
 
 const API_CONFIG = {
     'host': 'localhost',
-    'port': 300
+    'port': 3000
 }
 
 export default function LoginPage(){
@@ -18,7 +18,7 @@ export default function LoginPage(){
     const [isPasswordVisible, setPasswordVisible] = useState(false)
 
     function handleLogin(event: any){
-        fetch(`http://${API_CONFIG.host}:${API_CONFIG.port}/api/login`, {
+        fetch(`http://${API_CONFIG.host}:${API_CONFIG.port}/api/v1/login`, {
             method: "PUT",
             body: JSON.stringify({
                 'username': user_data.username,
