@@ -8,8 +8,12 @@ import { API_CONFIG } from "../../config/config";
 export default function LoginPage(){
     const [user_cred, setUserCredential] = useState({
         'username': '',
-        'password': '',
-        'is_authenticated': false
+        'password': ''
+    })
+    const [loginStatus, setLoginStatus] = useState({
+        'is_authenticated': false,
+        'is_loading': true,
+        'get_error': false
     })
 
     function handleLogin(event: any){
@@ -21,16 +25,25 @@ export default function LoginPage(){
             }),
             credentials: "include"
         })
-        .then ( data => setUserCredential({...user_cred, 'is_authenticated': true}))
-        .catch (err => console.error(err))
+        .then ( data => {
+            setLoginStatus({...loginStatus, 'is_loading': false})
+            return data.json()
+        })
+            .then(res =>{
+                setLoginStatus({...loginStatus, 'is_authenticated': true})
+            } )
+        .catch (err => {
+            setLoginStatus({...loginStatus, 'is_loading': false, 'get_error': true})
+            console.error(err)
+        })
     }
 
     useEffect(() => {
-        if (user_cred.is_authenticated){
+        if (loginStatus.is_authenticated){
             // TODO: user id in multiple page
             redirect('/todo')
         }
-    }, [user_cred.is_authenticated])
+    }, [loginStatus.is_authenticated])
 
     return (
         <div className="bg-slate-100 p-3 m-8">
@@ -38,6 +51,12 @@ export default function LoginPage(){
                 <div className="flex flex-col">
                     <p className="font-semibold text-center">Sign-In</p>
                 </div>
+                {loginStatus.get_error &&
+                    <div className="bg-red-400 text-white px-2 mx-3">
+                        {/* TODO: add error icon */}
+                        <p>Error Message</p>
+                    </div>
+                }
 
                 {/* Username */}
                 <div className="flex flex-col m-2">
