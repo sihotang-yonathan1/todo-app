@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FiEdit, FiCheck ,FiTrash2, FiPlus } from "react-icons/fi";
 
 function TaskContainer({name, id, created_time, deleteFunct}: {name: string, id: number, created_time: Date, deleteFunct: any}){
@@ -68,6 +68,15 @@ type TaskData = {
 export default function TodoAppPage(){
     const [taskList, setTaskList] = useState(Array<TaskData>)
     const [currentTask, setCurrentTask] = useState("")
+    const [currentModeIndex, setCurrentModeIndex] = useState(0)
+
+    const modeValue = [{
+        'index': 0,
+        'name': 'live'
+    }, {
+        'index': 1,
+        'name': 'db'
+    }]
 
     function handleAddTask(event: any){
         if (currentTask){
@@ -93,6 +102,10 @@ export default function TodoAppPage(){
         new_data.splice(idx, 1)
         setTaskList(new_data)
     }
+
+    useEffect( () => {
+        console.info(`data source changed to ${modeValue[currentModeIndex].name}`)
+    }, [currentModeIndex, modeValue])
 
     return (
         <div className="border-2 flex flex-col bg-[#FCEDDA]">
@@ -129,8 +142,22 @@ export default function TodoAppPage(){
                 </div>
             </div>
 
-            <div className="flex-row flex justify-center pt-1 pb-2">
+            <div className="flex-row flex pt-1 pb-2 pl-3 justify-between mt-2">
                 <p>You have <span className="text-red-400">{taskList.length}</span> {taskList.length > 1 ? "tasks": "task"}  to do</p>
+                <div className="px-2">
+                    <button
+                        type="button"
+                        className="bg-green-600 text-white text-sm p-1 rounded uppercase"
+                        onClick={() => {
+                            if (currentModeIndex + 1 > (modeValue.length - 1)){
+                                setCurrentModeIndex(0)
+                            }
+                            else {
+                                setCurrentModeIndex(prev => prev + 1)
+                            }
+                        }}
+                    >{modeValue[currentModeIndex].name}</button>
+                </div>
             </div>
 
             {taskList.length > 0 && (
