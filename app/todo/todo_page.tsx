@@ -95,7 +95,7 @@ export default function TodoAppPage(){
     }
 
     return (
-        <div className="border-2 flex flex-col bg-slate-100">
+        <div className="border-2 flex flex-col bg-[#FCEDDA]">
            
             {/* Title */}
             <div className="my-2">

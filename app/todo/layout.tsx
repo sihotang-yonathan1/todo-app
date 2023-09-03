@@ -12,7 +12,7 @@ export default function TodoAppLayout({children}: {children: React.ReactNode}){
         <div className="flex flex-row">
             {/*  sidebar */}
             { isSidebarVisible && <Sidebar />}
-            <div className="flex flex-col flex-grow">
+            <div className="flex flex-col flex-grow bg-[#EE4E34]">
                 {/* Header */}
                 <div className="flex flex-row px-2 py-1 items-center">
 
@@ -36,8 +36,8 @@ export default function TodoAppLayout({children}: {children: React.ReactNode}){
                     </div>
 
                 </div>
-                {/* Content Container */}
-                <div className="bg-slate-300 min-h-screen flex flex-col items-center justify-center">
+                {/* Content Container */} 
+                <div className="bg-[#e79183] min-h-screen flex flex-col items-center justify-center">
                     {children}
                 </div>
             </div>

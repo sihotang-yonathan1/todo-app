@@ -27,7 +27,7 @@ export default function Sidebar(){
         }
     ]
     return (
-        <div className="p-2">
+        <div className="p-2 bg-[#84b5db]">
             <div className="bg-yellow-200 flex flex-1">
                 <p>User data</p>
             </div>
