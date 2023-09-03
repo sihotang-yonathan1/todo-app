@@ -65,18 +65,18 @@ type TaskData = {
     'created_time': Date
 }
 
+const modeValue = [{
+    'index': 0,
+    'name': 'live'
+}, {
+    'index': 1,
+    'name': 'db'
+}]
+
 export default function TodoAppPage(){
     const [taskList, setTaskList] = useState(Array<TaskData>)
     const [currentTask, setCurrentTask] = useState("")
     const [currentModeIndex, setCurrentModeIndex] = useState(0)
-
-    const modeValue = [{
-        'index': 0,
-        'name': 'live'
-    }, {
-        'index': 1,
-        'name': 'db'
-    }]
 
     function handleAddTask(event: any){
         if (currentTask){
@@ -105,7 +105,7 @@ export default function TodoAppPage(){
 
     useEffect( () => {
         console.info(`data source changed to ${modeValue[currentModeIndex].name}`)
-    }, [currentModeIndex, modeValue])
+    }, [currentModeIndex])
 
     return (
         <div className="border-2 flex flex-col bg-[#FCEDDA]">
