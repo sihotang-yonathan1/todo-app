@@ -1,7 +1,15 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { FiEdit, FiCheck ,FiTrash2, FiPlus } from "react-icons/fi";
+
+function TaskContainerLoading(){
+    return (
+        <div>
+            <p>Loading Task</p>
+        </div>
+    )
+}
 
 function TaskContainer({name, id, created_time, deleteFunct}: {name: string, id: number, created_time: Date, deleteFunct: any}){
     const [taskName, setTaskname] = useState(name)
@@ -16,46 +24,48 @@ function TaskContainer({name, id, created_time, deleteFunct}: {name: string, id:
     }
 
     return (
-        <div className="flex flex-row justify-between border-b-2 border-b-black my-2">
-            {/* title */}
-            <div className="flex flex-col justify-center">
-                <input
-                    type="text"
-                    value={taskName}
-                    disabled={!isEditMode}
-                    className="disabled:bg-cyan-300"
-                    onChange={handleTaskNameEdit}
-                />
-                <div>
-                    <p className="text-xs">{created_time.getTime()}</p>
-                </div>
-            </div>
-
-            {/* Action */}
-            <div className="flex flex-row mb-1">
-                {/* Delete */}
-                {!isEditMode &&
-                    <div className="rounded border-2 p-2 mx-2 bg-gray-500">
-                        <button
-                            type="button" 
-                            className="text-white text-center"
-                            onClick={() => deleteFunct(id)}
-                        >
-                            <FiTrash2 color="#ef4340"/>
-                        </button>
+        <Suspense fallback={<TaskContainerLoading />}>
+            <div className="flex flex-row justify-between border-b-2 border-b-black my-2">
+                {/* title */}
+                <div className="flex flex-col justify-center">
+                    <input
+                        type="text"
+                        value={taskName}
+                        disabled={!isEditMode}
+                        className="disabled:bg-cyan-300"
+                        onChange={handleTaskNameEdit}
+                    />
+                    <div>
+                        <p className="text-xs">{created_time.getTime()}</p>
                     </div>
-                }
+                </div>
 
-                {/* Update */}
-                <div className="rounded border-2 p-2 mx-2 bg-gray-500">
-                    <button 
-                        className="text-white"
-                        type="button"
-                        onClick={handleEditMode}
-                    >{isEditMode ? <FiCheck color="#80c904"/> : <FiEdit color="#f6e683"/>}</button>
+                {/* Action */}
+                <div className="flex flex-row mb-1">
+                    {/* Delete */}
+                    {!isEditMode &&
+                        <div className="rounded border-2 p-2 mx-2 bg-gray-500">
+                            <button
+                                type="button" 
+                                className="text-white text-center"
+                                onClick={() => deleteFunct(id)}
+                            >
+                                <FiTrash2 color="#ef4340"/>
+                            </button>
+                        </div>
+                    }
+
+                    {/* Update */}
+                    <div className="rounded border-2 p-2 mx-2 bg-gray-500">
+                        <button 
+                            className="text-white"
+                            type="button"
+                            onClick={handleEditMode}
+                        >{isEditMode ? <FiCheck color="#80c904"/> : <FiEdit color="#f6e683"/>}</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Suspense>
     )
 }
 
