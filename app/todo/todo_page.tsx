@@ -229,7 +229,12 @@ export default function TodoAppPage(){
                     <button
                         type="button"
                         className="bg-slate-700 p-1 rounded text-red-400"
-                        onClick={() => setModalVisibility(true)}
+                        onClick={() => {
+                            // Only open the modal if there's any task
+                            if (taskList.length > 0){
+                                setModalVisibility(true)
+                            }
+                        }}
                     > Delete All 
                     </button>   
                 </div>
