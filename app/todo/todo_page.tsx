@@ -87,6 +87,7 @@ export default function TodoAppPage(){
     const [taskList, setTaskList] = useState(Array<TaskData>)
     const [currentTask, setCurrentTask] = useState("")
     const [currentModeIndex, setCurrentModeIndex] = useState(0)
+    const [isModalVisible, setModalVisibility] = useState(false)
 
     function handleAddTask(event: any){
         if (currentTask){
@@ -104,6 +105,7 @@ export default function TodoAppPage(){
     }
 
     function handleDeleteAllTask(event: any){
+        setModalVisibility(true)
         setTaskList([])
     }
 
@@ -113,91 +115,127 @@ export default function TodoAppPage(){
         setTaskList(new_data)
     }
 
+    function handleModalVisibility(event: any){
+        setModalVisibility(!isModalVisible)
+    }
+
     useEffect( () => {
         console.info(`data source changed to ${modeValue[currentModeIndex].name}`)
     }, [currentModeIndex])
 
     return (
-        <div className="border-2 flex flex-col bg-[#FCEDDA]">
-           
-            {/* Title */}
-            <div className="my-2">
-                <p className="text-center font-semibold">Todo App</p>
-            </div>
+        <div>
+            {/* TODO: extract function and set it outside todo_page.tsx */}
+            {/* Delete modal */}
+            { isModalVisible && 
+                <div className="bg-slate-100">
+                    {/* Modal title */}
+                    <div>
+                        <p className="font-semibold text-center">Confirmation Menu</p>
+                    </div>
+                    {/* Modal content */}
+                    <div>
+                        <p className="text-center">Are you sure ?</p>
+                    </div>
+                    {/* Action button */}
+                    <div className="flex flex-row justify-between px-2">
+                        {/* Cancel */}
+                        <div className="bg-red-400 rounded p-1 mt-1">
+                            <button type="button" onClick={handleModalVisibility}>
+                                <p>Cancel</p>
+                            </button>
+                        </div>
 
-            {/* Upper action */}
-            <div className="flex flex-row px-2 justify-center">
-                {/* textinput */}
-                <div className="ml-1">
-                    <input 
-                        type="text" 
-                        name="task-input" 
-                        id="task-input"
-                        placeholder="Enter your task" 
-                        className="px-2 rounded py-1"
-                        value={currentTask}
-                        onChange={handleCurrentTask}
-                    />
+                        {/* Yes */}
+                        <div className="bg-green-300 rounded p-1 mt-1">
+                            <button type="button" onClick={handleModalVisibility}>
+                                <p>Yes</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div className="border-2 flex flex-col bg-[#FCEDDA]">
+            
+                {/* Title */}
+                <div className="my-2">
+                    <p className="text-center font-semibold">Todo App</p>
                 </div>
 
-                {/* Add button */}
-                <div className="px-2 flex">
-                    <button 
-                        type="button"
-                        className="bg-blue-300 rounded p-2 border"
-                        onClick={handleAddTask}
-                    >
-                        <FiPlus color="#1f1f1f"/>
-                    </button>
-                </div>
-            </div>
+                {/* Upper action */}
+                <div className="flex flex-row px-2 justify-center">
+                    {/* textinput */}
+                    <div className="ml-1">
+                        <input 
+                            type="text" 
+                            name="task-input" 
+                            id="task-input"
+                            placeholder="Enter your task" 
+                            className="px-2 rounded py-1"
+                            value={currentTask}
+                            onChange={handleCurrentTask}
+                        />
+                    </div>
 
-            <div className="flex-row flex pt-1 pb-2 pl-3 justify-between mt-2">
-                <p>You have <span className="text-red-400">{taskList.length}</span> {taskList.length > 1 ? "tasks": "task"}  to do</p>
-                <div className="px-2">
+                    {/* Add button */}
+                    <div className="px-2 flex">
+                        <button 
+                            type="button"
+                            className="bg-blue-300 rounded p-2 border"
+                            onClick={handleAddTask}
+                        >
+                            <FiPlus color="#1f1f1f"/>
+                        </button>
+                    </div>
+                </div>
+
+                <div className="flex-row flex pt-1 pb-2 pl-3 justify-between mt-2">
+                    <p>You have <span className="text-red-400">{taskList.length}</span> {taskList.length > 1 ? "tasks": "task"}  to do</p>
+                    <div className="px-2">
+                        <button
+                            type="button"
+                            className="bg-green-600 text-white text-sm p-1 rounded uppercase"
+                            onClick={() => {
+                                if (currentModeIndex + 1 > (modeValue.length - 1)){
+                                    setCurrentModeIndex(0)
+                                }
+                                else {
+                                    setCurrentModeIndex(prev => prev + 1)
+                                }
+                            }}
+                        >{modeValue[currentModeIndex].name}</button>
+                    </div>
+                </div>
+
+                {taskList.length > 0 && (
+                <div className="px-3 py-2 my-2 mx-2 bg-cyan-300">
+                    <div>
+                        <p className="underline font-bold">Task List</p>
+                    </div>
+                    {/* Task List Container */}
+                    <div>
+                        {/* TODO: get data from database */}
+                        {taskList.map(data => (
+                            <TaskContainer 
+                                name={data.name} 
+                                key={data.id}
+                                id={data.id}
+                                created_time={data.created_time}
+                                deleteFunct={handleDeleteSingleTask}
+                            />
+                        ))}
+                    </div>
+                </div>
+                )}
+
+                <div className="flex flex-row justify-center mb-2">
                     <button
                         type="button"
-                        className="bg-green-600 text-white text-sm p-1 rounded uppercase"
-                        onClick={() => {
-                            if (currentModeIndex + 1 > (modeValue.length - 1)){
-                                setCurrentModeIndex(0)
-                            }
-                            else {
-                                setCurrentModeIndex(prev => prev + 1)
-                            }
-                        }}
-                    >{modeValue[currentModeIndex].name}</button>
+                        className="bg-slate-700 p-1 rounded text-red-400"
+                        onClick={handleDeleteAllTask}
+                    > Delete All 
+                    </button>   
                 </div>
-            </div>
-
-            {taskList.length > 0 && (
-            <div className="px-3 py-2 my-2 mx-2 bg-cyan-300">
-                <div>
-                    <p className="underline font-bold">Task List</p>
-                </div>
-                {/* Task List Container */}
-                <div>
-                    {/* TODO: get data from database */}
-                    {taskList.map(data => (
-                        <TaskContainer 
-                            name={data.name} 
-                            key={data.id}
-                            id={data.id}
-                            created_time={data.created_time}
-                            deleteFunct={handleDeleteSingleTask}
-                        />
-                    ))}
-                </div>
-            </div>
-            )}
-
-            <div className="flex flex-row justify-center mb-2">
-                <button
-                    type="button"
-                    className="bg-slate-700 p-1 rounded text-red-400"
-                    onClick={handleDeleteAllTask}
-                > Delete All 
-                </button>   
             </div>
         </div>
     )
