@@ -104,19 +104,10 @@ export default function TodoAppPage(){
         setCurrentTask(event.target.value)
     }
 
-    function handleDeleteAllTask(event: any){
-        setModalVisibility(true)
-        setTaskList([])
-    }
-
     function handleDeleteSingleTask(idx: any){
         const new_data = [...taskList]
         new_data.splice(idx, 1)
         setTaskList(new_data)
-    }
-
-    function handleModalVisibility(event: any){
-        setModalVisibility(!isModalVisible)
     }
 
     useEffect( () => {
@@ -127,36 +118,42 @@ export default function TodoAppPage(){
         <div>
             {/* TODO: extract function and set it outside todo_page.tsx */}
             {/* Delete modal */}
-            { isModalVisible && 
-                <div className="bg-slate-100">
-                    {/* Modal title */}
-                    <div>
-                        <p className="font-semibold text-center">Confirmation Menu</p>
-                    </div>
-                    {/* Modal content */}
-                    <div>
-                        <p className="text-center">Are you sure ?</p>
-                    </div>
-                    {/* Action button */}
-                    <div className="flex flex-row justify-between px-2">
-                        {/* Cancel */}
-                        <div className="bg-red-400 rounded p-1 mt-1">
-                            <button type="button" onClick={handleModalVisibility}>
-                                <p>Cancel</p>
-                            </button>
+            { isModalVisible &&
+                <div className="fixed flex justify-center items-center z-[9999]"> 
+                    <div className="bg-slate-100">
+                        {/* Modal title */}
+                        <div>
+                            <p className="font-semibold text-center">Confirmation Menu</p>
                         </div>
+                        {/* Modal content */}
+                        <div>
+                            <p className="text-center">Are you sure ?</p>
+                        </div>
+                        {/* Action button */}
+                        <div className="flex flex-row justify-between px-2">
+                            {/* Cancel */}
+                            <div className="bg-red-400 rounded p-1 mt-1">
+                                <button type="button" onClick={() => {
+                                    setModalVisibility(false)
+                                }}>
+                                    <p>Cancel</p>
+                                </button>
+                            </div>
 
-                        {/* Yes */}
-                        <div className="bg-green-300 rounded p-1 mt-1">
-                            <button type="button" onClick={handleModalVisibility}>
-                                <p>Yes</p>
-                            </button>
+                            {/* Yes */}
+                            <div className="bg-green-300 rounded p-1 mt-1">
+                                <button type="button" onClick={(event) => {
+                                    setModalVisibility(false)
+                                    setTaskList([])
+                                }}>
+                                    <p>Yes</p>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             }
             <div className="border-2 flex flex-col bg-[#FCEDDA]">
-            
                 {/* Title */}
                 <div className="my-2">
                     <p className="text-center font-semibold">Todo App</p>
@@ -232,7 +229,7 @@ export default function TodoAppPage(){
                     <button
                         type="button"
                         className="bg-slate-700 p-1 rounded text-red-400"
-                        onClick={handleDeleteAllTask}
+                        onClick={() => setModalVisibility(true)}
                     > Delete All 
                     </button>   
                 </div>
