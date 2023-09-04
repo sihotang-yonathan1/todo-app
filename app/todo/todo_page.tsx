@@ -120,7 +120,7 @@ export default function TodoAppPage(){
             {/* Delete modal */}
             { isModalVisible &&
                 <div className="fixed flex justify-center items-center z-[9999]"> 
-                    <div className="bg-slate-100">
+                    <div className="bg-slate-100 p-2 rounded-md">
                         {/* Modal title */}
                         <div>
                             <p className="font-semibold text-center">Confirmation Menu</p>
