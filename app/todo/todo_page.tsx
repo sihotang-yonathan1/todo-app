@@ -114,6 +114,7 @@ export default function TodoAppPage(){
         console.info(`data source changed to ${modeValue[currentModeIndex].name}`)
     }, [currentModeIndex])
 
+
     return (
         <div>
             {/* TODO: extract function and set it outside todo_page.tsx */}
@@ -153,7 +154,9 @@ export default function TodoAppPage(){
                     </div>
                 </div>
             }
-            <div className="border-2 flex flex-col bg-[#FCEDDA]">
+            <div className={ !isModalVisible 
+                ? "border-2 flex flex-col bg-[#FCEDDA]"
+                : "border-2 flex flex-col bg-[#FCEDDA] opacity-20"}>
                 {/* Title */}
                 <div className="my-2">
                     <p className="text-center font-semibold">Todo App</p>
