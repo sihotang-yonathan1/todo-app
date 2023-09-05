@@ -84,6 +84,7 @@ const modeValue = [{
 }]
 
 export default function TodoAppPage(){
+    // TODO: refactor all state
     const [taskList, setTaskList] = useState(Array<TaskData>)
     const [currentTask, setCurrentTask] = useState("")
     const [currentModeIndex, setCurrentModeIndex] = useState(0)
