@@ -83,7 +83,7 @@ const modeValue = [{
     'name': 'db'
 }]
 
-export default function TodoAppPage(){
+export default function TodoAppPage({user_id}: {user_id: string | number}){
     // TODO: refactor all state
     const [taskList, setTaskList] = useState(Array<TaskData>)
     const [currentTask, setCurrentTask] = useState("")

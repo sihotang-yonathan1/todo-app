@@ -1,4 +1,5 @@
 import { createPool } from "mariadb";
+import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 // This code using default xampp config that may not the same as other
@@ -12,6 +13,8 @@ const pool = createPool({
     database: "todo_app_db"
 })
 
+
+// POST is used as login check
 export async function POST(request: NextRequest){
     const request_body = await request.text()
     // TODO: handle request when request body not json
@@ -31,6 +34,9 @@ export async function POST(request: NextRequest){
             request_json['username'],
             request_json['password']
         ])
+        // set userId cookie
+        cookies().set('userId', (result[0].id || -1).toString())
+        
         response = new NextResponse(JSON.stringify(result[0]))
         await conn.end()
     }
@@ -43,6 +49,7 @@ export async function POST(request: NextRequest){
     return response
 }
 
+// PUT is used to adding new user
 export async function PUT(request: NextRequest){
     const request_body = await request.text()
     // TODO: handle request when request body not json
