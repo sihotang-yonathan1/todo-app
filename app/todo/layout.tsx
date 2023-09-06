@@ -13,7 +13,10 @@ export default function TodoAppLayout({children}: {children: React.ReactNode}){
             {/*  sidebar */}
             { isSidebarVisible && <Sidebar />}
             <div className="flex flex-col flex-grow bg-[#EE4E34]">
-                <Header isSidebarVisible={isSidebarVisible} setSidebarVisible={setSidebarVisible}/>
+                <Header 
+                    isSidebarVisible={isSidebarVisible} 
+                    setSidebarVisible={setSidebarVisible}
+                />
                 {/* Content Container */} 
                 <div className="bg-[#e79183] min-h-screen flex flex-col items-center justify-center">
                     {children}
