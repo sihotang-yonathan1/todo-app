@@ -14,6 +14,8 @@ function TaskContainerLoading(){
 function TaskContainer({name, id, created_time, deleteFunct}: {name: string, id: number, created_time: Date, deleteFunct: any}){
     const [taskName, setTaskname] = useState(name)
     const [isEditMode, setEditMode] = useState(false)
+    // At the moment, false means task not completed, true means task completed
+    const [taskStatus, setTaskStatus] = useState(false)
 
     function handleTaskNameEdit(event: any){
         setTaskname(event.target.value)
@@ -23,9 +25,21 @@ function TaskContainer({name, id, created_time, deleteFunct}: {name: string, id:
         setEditMode(!isEditMode)
     }
 
+    function handleTaskStatus(event: any){
+        setTaskStatus(!taskStatus)
+    }
+
     return (
         <Suspense fallback={<TaskContainerLoading />}>
             <div className="flex flex-row justify-between border-b-2 border-b-black my-2">
+                {/* Task Status */}
+                <div className="flex p-1">
+                    <input 
+                        type="checkbox"
+                        onChange={handleTaskStatus}
+                        checked={taskStatus}
+                    />
+                </div>
                 {/* title */}
                 <div className="flex flex-col justify-center">
                     <input
