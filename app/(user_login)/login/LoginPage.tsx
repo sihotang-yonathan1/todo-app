@@ -15,7 +15,7 @@ export default function LoginPage({user_id}: {user_id: string | number}){
         'is_loading': true,
         'get_error': false
     })
-    console.log(user_id)
+
     const [userId, setUserId] = useState(null)
 
     function handleLogin(event: any){
