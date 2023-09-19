@@ -46,7 +46,7 @@ export default function Sidebar(){
     ]
     return (
         <div className="bg-[#84b5db]">
-            <div className="bg-yellow-200 flex flex-1 py-2 px-2">
+            <div className="bg-yellow-200 flex flex-1 py-2 px-5">
                 <p>User data</p>
             </div>
             {/*  sidebar menu */}
