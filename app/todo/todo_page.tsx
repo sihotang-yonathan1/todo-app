@@ -170,7 +170,7 @@ export default function TodoAppPage({user_id}: {user_id: string | number}){
                 </div>
             }
             <div className={ !isModalVisible 
-                ? "border-2 flex flex-col bg-[#FCEDDA]"
+                ? "border-2 flex flex-col bg-[#FCEDDA] rounded-md"
                 : "border-2 flex flex-col bg-[#FCEDDA] opacity-20"}>
                 {/* Title */}
                 <div className="my-2">
