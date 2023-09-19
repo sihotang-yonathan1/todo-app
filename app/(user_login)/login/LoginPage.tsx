@@ -74,6 +74,7 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                             ...user_cred, 
                             'username': event.target.value
                         })}
+                        maxLength={80}
                     />
                 </div>
 
@@ -90,6 +91,7 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                             ...user_cred,
                             'password': event.target.value
                         })}
+                        maxLength={80}
                     />
                 </div>
 
