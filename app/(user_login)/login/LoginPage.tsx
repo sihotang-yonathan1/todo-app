@@ -99,7 +99,10 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                 <div className="justify-center flex">
                     <button
                         type="submit"
-                        className="bg-red-400 rounded p-2 my-2 text-white capitalize"
+                        className="
+                        bg-red-400 rounded p-2 my-2 text-white capitalize
+                        hover:bg-zinc-600 hover:text-slate-200
+                        "
                         onClick={handleLogin}
                     >Login</button>
                 </div>
