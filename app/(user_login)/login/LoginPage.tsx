@@ -113,7 +113,8 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                 <Link href="/register">
                     <button
                         type="button"
-                        className="bg-green-500 p-2 border rounded text-white"
+                        className="bg-green-500 p-2 border rounded text-white
+                        hover:bg-green-800 hover:text-slate-100"
                     >Create New Account</button>
                 </Link>
             </div>
