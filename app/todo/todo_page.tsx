@@ -50,7 +50,7 @@ function TaskContainer({name, id, created_time, deleteFunct}: {name: string, id:
                         onChange={handleTaskNameEdit}
                     />
                     <div>
-                        <p className="text-xs">{created_time.getTime()}</p>
+                        <p className="text-xs italic">Created at {created_time.getHours().toString()}:{created_time.getMinutes().toString()}:{created_time.getSeconds()}</p>
                     </div>
                 </div>
 
