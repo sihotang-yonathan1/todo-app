@@ -1,12 +1,15 @@
 import { PoolConnection, createPool } from "mariadb";
 import { NextRequest, NextResponse } from "next/server";
+import * as dotenv from 'dotenv'
+
+dotenv.config()
 
 const pool = createPool({
-    host: "localhost",
-    user: "root",
-    password: "",
-    port: 3306,
-    database: "todo_app_db"
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    host: process.env.DB_HOST,
+    port: parseInt(process.env.DB_PORT || "3306"),
+    database: process.env.DB_NAME
 })
 
 
