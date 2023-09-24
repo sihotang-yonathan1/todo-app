@@ -6,7 +6,7 @@ import Sidebar from "./sidebarClient";
 export function Header(){
     return (
         // Header
-        <div className="flex flex-row px-2 py-1 items-center">
+        <div className="flex flex-row px-2 py-1 items-center justify-between">
             {/* Left */}
             <div className="flex flex-row">
                 {/* TODO: open sidebar if clicked */}
@@ -19,7 +19,7 @@ export function Header(){
             </div>
 
             {/* Right */}
-            <div className="ml-auto">
+            <div>
                 <button className=" bg-slate-500 rounded-full p-1">
                     {/* TODO: change icon to user avatar if available */}
                     <FiUser color="#efefef"/>
