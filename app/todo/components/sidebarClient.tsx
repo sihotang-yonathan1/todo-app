@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
+import React from "react"
 
 
 function LogoutMenu(){
@@ -27,23 +28,16 @@ function SidebarMenuContainer({name, url, clickFunction, hasFunction}: {name: st
     )
 }
 
+function MenuSidebarContainer({children}: {children: React.ReactNode}){
+    return (
+        <div className="hover:bg-[#84DBD6] hover:text-slate-200 py-1 text-left border-2 my-1 mx-1
+        px-1">
+            {children}
+        </div>
+    )
+}
+
 export default function Sidebar(){
-    const sidebar_menu_list = [
-        {
-            'id': 0,
-            'name': 'Home',
-            'url': '#',
-            'function': null,
-            'has_function': false
-        },
-        {
-            'id': 1,
-            'name': 'Logout',
-            'url': '/login',
-            'function': LogoutMenu,
-            'has_function': true
-        }
-    ]
     return (
         <div className="bg-[#84b5db]">
             <div className="bg-yellow-200 flex flex-1 py-2 px-5">
@@ -51,17 +45,14 @@ export default function Sidebar(){
             </div>
             {/*  sidebar menu */}
             <div className="flex flex-col py-2">
-                {sidebar_menu_list.map(
-                    data => (
-                        <SidebarMenuContainer
-                            name={data.name}
-                            url={data.url}
-                            key={data.id}
-                            clickFunction={data.function}
-                            hasFunction={data.has_function}
-                        />
-                    )    
-                )}
+                <MenuSidebarContainer>
+                    <Link href="/todo">
+                        <button type="button">Home</button>
+                    </Link>
+                </MenuSidebarContainer>
+                <MenuSidebarContainer>
+                    <button>Log-out</button>
+                </MenuSidebarContainer>
             </div>
         </div>
     )
