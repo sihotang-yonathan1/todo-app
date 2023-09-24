@@ -1,7 +1,9 @@
 import React from "react"
 import { FiMenu, FiUser } from "react-icons/fi"
 
-export function Header({isSidebarVisible, setSidebarVisible}: {isSidebarVisible: boolean, setSidebarVisible: React.Dispatch<React.SetStateAction<boolean>>}){
+import Sidebar from "./sidebarClient";
+
+export function Header(){
     return (
         // Header
         <div className="flex flex-row px-2 py-1 items-center">
@@ -10,7 +12,7 @@ export function Header({isSidebarVisible, setSidebarVisible}: {isSidebarVisible:
                 {/* TODO: open sidebar if clicked */}
                 <button 
                     type="button"
-                    onClick={() => setSidebarVisible(!isSidebarVisible)}
+                    // onClick={() => setSidebarVisible(!isSidebarVisible)}
                 >
                     <FiMenu />
                 </button>
