@@ -24,6 +24,7 @@ function TaskContainer({name, id, created_time, deleteFunct}: {name: string, id:
     const [isEditMode, setEditMode] = useState(false)
     // At the moment, false means task not completed, true means task completed
     const [taskStatus, setTaskStatus] = useState(false)
+    const [taskBackGroundColor, setTaskBackGroundColor] = useState<string>("bg-blue-300")
 
     function handleTaskNameEdit(event: any){
         setTaskname(event.target.value)
@@ -89,6 +90,17 @@ function TaskContainer({name, id, created_time, deleteFunct}: {name: string, id:
                             onClick={handleEditMode}
                         >{isEditMode ? <FiCheck color="#80c904"/> : <FiEdit color="#f6e683"/>}</button>
                     </TaskActionButton>
+                    {isEditMode && (
+                        <TaskActionButton>
+                            <input
+                                type="color"
+                                className="flex-shrink flex align-middle"
+                                onInput={event => {
+                                    setTaskBackGroundColor(event.currentTarget.value)
+                                }}
+                            />
+                        </TaskActionButton>
+                    )}
                 </div>
             </div>
         </Suspense>
