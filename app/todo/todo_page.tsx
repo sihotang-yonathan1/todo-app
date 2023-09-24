@@ -11,6 +11,14 @@ function TaskContainerLoading(){
     )
 }
 
+function TaskActionButton({children}: {children: React.ReactNode}){
+    return (
+        <div className="rounded border-2 p-2 mx-2 bg-gray-500">
+            {children}
+        </div>
+    )
+}
+
 function TaskContainer({name, id, created_time, deleteFunct}: {name: string, id: number, created_time: Date, deleteFunct: any}){
     const [taskName, setTaskname] = useState(name)
     const [isEditMode, setEditMode] = useState(false)
@@ -62,7 +70,7 @@ function TaskContainer({name, id, created_time, deleteFunct}: {name: string, id:
                 <div className="flex flex-row mb-1">
                     {/* Delete */}
                     {!isEditMode &&
-                        <div className="rounded border-2 p-2 mx-2 bg-gray-500">
+                        <TaskActionButton>
                             <button
                                 type="button" 
                                 className="text-white text-center"
@@ -70,17 +78,17 @@ function TaskContainer({name, id, created_time, deleteFunct}: {name: string, id:
                             >
                                 <FiTrash2 color="#ef4340"/>
                             </button>
-                        </div>
+                        </TaskActionButton>
                     }
 
                     {/* Update */}
-                    <div className="rounded border-2 p-2 mx-2 bg-gray-500">
+                    <TaskActionButton>
                         <button 
                             className="text-white"
                             type="button"
                             onClick={handleEditMode}
                         >{isEditMode ? <FiCheck color="#80c904"/> : <FiEdit color="#f6e683"/>}</button>
-                    </div>
+                    </TaskActionButton>
                 </div>
             </div>
         </Suspense>
