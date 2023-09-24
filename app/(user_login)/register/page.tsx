@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { FiEyeOff, FiEye } from "react-icons/fi";
 import { API_CONFIG } from "../../config/config";
+import { redirect } from "next/navigation";
 
 export default function LoginPage(){
     const [user_data, setUserData] = useState({
@@ -14,17 +15,35 @@ export default function LoginPage(){
     const [isPasswordVisible, setPasswordVisible] = useState(false)
 
     function handleLogin(event: any){
-        fetch(`http://${API_CONFIG.host}:${API_CONFIG.port}/api/v1/login`, {
-            method: "PUT",
-            body: JSON.stringify({
-                'username': user_data.username,
-                'password': user_data.password
-            }),
-            credentials: "include"
-        })
-        .then ( data => setUserData({...user_data, 'is_authenticated': true}))
-        .catch (err => console.error(err))
+        async function async_func(){
+            let response =  await fetch(`http://${API_CONFIG.host}:${API_CONFIG.port}/api/v1/login`, {
+                method: "PUT",
+                body: JSON.stringify({
+                    'username': user_data.username,
+                    'password': user_data.password
+                }),
+                credentials: "include"
+            })
+            if (response.ok){
+                setUserData({
+                    ...user_data,
+                    'is_authenticated': true
+                });
+
+            }
+            else {
+                console.error(`${response.status}-${response.statusText}`)
+            }
+            
+        }
+        async_func();
+        redirect('/login');
     }
+
+    if (user_data.is_authenticated){
+        redirect('/login');
+    }
+
     return (
         <div className="bg-slate-100 p-3 m-8 rounded">
             {/* Pre border */}
