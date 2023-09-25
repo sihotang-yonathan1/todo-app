@@ -8,7 +8,7 @@ export default function Searchcar({placeholder = "Search Here"}: {placeholder?: 
             <input
                 type="text"
                 placeholder={placeholder}
-                className="hover:outline-none focus:outline-none"
+                className="hover:outline-none focus:outline-none p-1"
             />
         </div>
     )
