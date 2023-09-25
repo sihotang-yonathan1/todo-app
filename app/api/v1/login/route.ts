@@ -83,5 +83,27 @@ export async function PUT(request: NextRequest){
 }
 
 export async function DELETE(request: NextRequest){
-    return NextResponse.json("ok")
+    let response_text = await request.text()
+
+    let response_json = JSON.parse(response_text)
+    let conn;
+    try {
+        conn = await pool.getConnection()
+        await conn.query(`
+            DELETE FROM user_cred WHERE username=?
+        `, [
+            response_json['username']
+        ])
+        conn.end()
+        return NextResponse.json("ok")
+        
+    }
+    catch (err){
+        console.error(err)
+        return new NextResponse(JSON.stringify({
+            'message': 'Operation cancelled, error occured'
+        }), {
+            status: 403
+        })
+    }
 }
