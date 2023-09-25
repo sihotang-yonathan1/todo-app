@@ -1,6 +1,6 @@
 "use client"
 
-import { Suspense, useEffect, useState } from "react"
+import React, { Suspense, useEffect, useState } from "react"
 import { FiEdit, FiCheck ,FiTrash2, FiPlus } from "react-icons/fi";
 
 function TaskContainerLoading(){
@@ -139,7 +139,7 @@ export default function TodoAppPage({user_id}: {user_id: string | number}){
         }
     }
 
-    function handleCurrentTask(event: any){
+    function handleCurrentTask(event: React.ChangeEvent<HTMLInputElement>){
         setCurrentTask(event.target.value)
     }
 
@@ -212,7 +212,18 @@ export default function TodoAppPage({user_id}: {user_id: string | number}){
                             placeholder="Enter your task" 
                             className="px-2 rounded py-1"
                             value={currentTask}
-                            onChange={handleCurrentTask}
+                            onInput={handleCurrentTask}
+                            onKeyDown={e => {
+                                if (e.code === "Enter"){
+                                    setCurrentTask(currentTask)
+                                    setTaskList(task => [...task, {
+                                        'name': currentTask,
+                                        'id': task.length,
+                                        'created_time': new Date()
+                                    }])
+                                    setCurrentTask("")
+                                }
+                            }}
                         />
                     </div>
 
