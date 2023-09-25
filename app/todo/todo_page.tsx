@@ -2,6 +2,7 @@
 
 import React, { Suspense, useEffect, useState } from "react"
 import { FiEdit, FiCheck ,FiTrash2, FiPlus } from "react-icons/fi";
+import Searchbar from "./components/content/task_container/Searchbar";
 
 function TaskContainerLoading(){
     return (
@@ -262,6 +263,8 @@ export default function TodoAppPage({user_id}: {user_id: string | number}){
                     <div>
                         <p className="underline font-bold">Task List</p>
                     </div>
+                    {/* Task Searchbar */}
+                    <Searchbar placeholder="Search task here"/>
                     {/* Task List Container */}
                     <div>
                         {/* TODO: get data from database */}
