@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 export default function TodoPageHome(){
     const user_id = cookies().get('userId')?.value || -1
     return (
-        <div>
+        <main>
             <TodoPage user_id={user_id}/>
-        </div>
+        </main>
     )
 }
