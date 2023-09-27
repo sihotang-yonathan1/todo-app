@@ -69,12 +69,13 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                         name="username"
                         id="login-username"
                         placeholder="Username"
-                        className="rounded border px-2 py-1"
+                        className="rounded border px-2 py-1 invalid:bg-red-300"
                         onChange={event => setUserCredential({
                             ...user_cred, 
                             'username': event.target.value
                         })}
                         maxLength={80}
+                        minLength={3}
                     />
                 </div>
 
@@ -86,12 +87,13 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                         name="password"
                         id="login-password"
                         placeholder="Password"
-                        className="rounded border px-2 py-1"
+                        className="rounded border px-2 py-1 invalid:bg-red-300"
                         onChange={event => setUserCredential({
                             ...user_cred,
                             'password': event.target.value
                         })}
                         maxLength={80}
+                        minLength={4}
                     />
                 </div>
 
