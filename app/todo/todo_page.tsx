@@ -4,6 +4,15 @@ import React, { Suspense, useEffect, useState } from "react"
 import { FiEdit, FiCheck ,FiTrash2, FiPlus } from "react-icons/fi";
 import Searchbar from "./components/content/task_container/Searchbar";
 
+type TaskInfo = {
+    'id': number,
+    'name': string,
+    'created_time': Date,
+    'start_date'?: Date,
+    'end_date'?: Date,
+    'status': boolean // At the moment, false means task not completed, true means task completed
+}
+
 function TaskContainerLoading(){
     return (
         <div>
@@ -21,22 +30,25 @@ function TaskActionButton({children}: {children: React.ReactNode}){
 }
 
 function TaskContainer({name, id, created_time, deleteFunct}: {name: string, id: number, created_time: Date, deleteFunct: any}){
-    const [taskName, setTaskname] = useState(name)
     const [isEditMode, setEditMode] = useState(false)
-    // At the moment, false means task not completed, true means task completed
-    const [taskStatus, setTaskStatus] = useState(false)
-    const [taskBackGroundColor, setTaskBackGroundColor] = useState<string>("bg-blue-300")
 
-    function handleTaskNameEdit(event: any){
-        setTaskname(event.target.value)
+    const [taskBackGroundColor, setTaskBackGroundColor] = useState<string>("bg-blue-300")
+    const [taskInfo, setTaskInfo] = useState<TaskInfo>({
+        'name': name,
+        'id': id,
+        'created_time': created_time,
+        'status': false
+    })
+
+    function handleTaskInfo(event: React.ChangeEvent<HTMLInputElement>){
+        setTaskInfo({
+            ...taskInfo,
+            [event.target.name]: event.target.value
+        })
     }
 
     function handleEditMode(event: any){
         setEditMode(!isEditMode)
-    }
-
-    function handleTaskStatus(event: any){
-        setTaskStatus(!taskStatus)
     }
 
     return (
@@ -46,18 +58,23 @@ function TaskContainer({name, id, created_time, deleteFunct}: {name: string, id:
                 <div className="flex p-1">
                     <input 
                         type="checkbox"
-                        onChange={handleTaskStatus}
-                        checked={taskStatus}
+                        name="status"
+                        onChange={e => setTaskInfo({
+                            ...taskInfo, 
+                            'status': !taskInfo.status
+                        })}
+                        checked={taskInfo?.status ?? false}
                     />
                 </div>
                 {/* title */}
                 <div className="flex flex-col justify-center">
                     <input
                         type="text"
-                        value={taskName}
+                        name="name"
+                        value={taskInfo?.name}
                         disabled={!isEditMode}
                         className="disabled:bg-cyan-300"
-                        onChange={handleTaskNameEdit}
+                        onChange={handleTaskInfo}
                     />
                     <div>
                         <p className="text-xs italic">
