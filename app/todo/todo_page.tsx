@@ -205,7 +205,7 @@ export default function TodoAppPage({user_id}: {user_id: string | number}){
                 {/* Upper action */}
                 <div className="flex flex-row px-2 justify-center">
                     {/* textinput */}
-                    <div className="ml-1">
+                    <div className="ml-1 flex flex-col">
                         <input 
                             type="text" 
                             name="task-input" 
@@ -226,6 +226,26 @@ export default function TodoAppPage({user_id}: {user_id: string | number}){
                                 }
                             }}
                         />
+                        <React.Fragment>
+                            <div className="flex flex-row mt-1 gap-2">
+                                <div className="flex flex-col">
+                                    <label htmlFor="start_date_input" className="text-xs">Start date</label>
+                                    <input
+                                        type="date"
+                                        name="start_date"
+                                        id="start_date_input"
+                                    />
+                                </div>
+                                <div className="flex flex-col">
+                                    <label htmlFor="end_date_input" className="text-xs">End Date</label>
+                                    <input
+                                        type="date"
+                                        name="end_date"
+                                        id="end_date_input"
+                                    />
+                                </div>
+                            </div>
+                        </React.Fragment>
                     </div>
 
                     {/* Add button */}
