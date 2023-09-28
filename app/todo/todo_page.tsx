@@ -232,7 +232,7 @@ export default function TodoAppPage({user_id}: {user_id: string | number}){
                             value={currentTask}
                             onInput={handleCurrentTask}
                             onKeyDown={e => {
-                                if (e.code === "Enter"){
+                                if (e.code === "Enter" && currentTask != ""){
                                     setCurrentTask(currentTask)
                                     setTaskList(task => [...task, {
                                         'name': currentTask,
