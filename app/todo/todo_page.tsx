@@ -269,8 +269,9 @@ export default function TodoAppPage({user_id}: {user_id: string | number}){
                     <div className="px-2 flex">
                         <button 
                             type="button"
-                            className="bg-blue-300 rounded p-2 border"
+                            className="bg-blue-300 rounded p-2 border disabled:opacity-75 disabled:bg-sky-300"
                             onClick={handleAddTask}
+                            disabled={currentTask == ""}
                         >
                             <FiPlus color="#1f1f1f"/>
                         </button>
