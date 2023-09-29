@@ -8,7 +8,7 @@ import { ProfileButton } from "./header/ProfileButton";
 export function Header(){
     return (
         // Header
-        <div className="flex flex-row px-2 py-1 items-center justify-between">
+        <header className="flex flex-row px-2 py-1 items-center justify-between">
             {/* Left */}
             <div className="flex flex-row">
                 {/* TODO: open sidebar if clicked */}
@@ -25,6 +25,6 @@ export function Header(){
                 <ProfileButton />
             </div>
 
-        </div>
+        </header>
     )
 }
