@@ -11,7 +11,7 @@ export default function TodoAppLayout({children}: {children: React.ReactNode}){
             <div className="flex flex-col flex-grow bg-[#EE4E34]">
                 <Header/>
                 {/* Content Container */} 
-                <div className="bg-[#e79183] min-h-screen flex flex-col items-center justify-center">
+                <div className="bg-[#e79183] h-screen flex flex-col items-center justify-center max-h-full">
                     {children}
                 </div>
             </div>

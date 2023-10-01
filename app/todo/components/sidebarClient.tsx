@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import React from "react"
+import Uppersidebar from "./sidebar/UpperSidebar"
+import LowerSidebar from "./sidebar/LowerSidebar"
 
 
 function LogoutMenu(){
@@ -39,10 +41,8 @@ function MenuSidebarContainer({children}: {children: React.ReactNode}){
 
 export default function Sidebar(){
     return (
-        <div className="bg-[#84b5db]">
-            <div className="bg-yellow-200 flex flex-1 py-2 px-5">
-                <p>User data</p>
-            </div>
+        <div className="bg-[#84b5db] flex flex-col">
+            <Uppersidebar />
             {/*  sidebar menu */}
             <div className="flex flex-col py-2">
                 <MenuSidebarContainer>
@@ -50,9 +50,9 @@ export default function Sidebar(){
                         <button type="button">Home</button>
                     </Link>
                 </MenuSidebarContainer>
-                <MenuSidebarContainer>
-                    <button>Log-out</button>
-                </MenuSidebarContainer>
+            </div>
+            <div className=" flex flex-col mt-auto border-t py-1 mb-2 bg-cyan-300">
+                <LowerSidebar />
             </div>
         </div>
     )
