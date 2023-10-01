@@ -51,7 +51,7 @@ export default function Sidebar(){
                     </Link>
                 </MenuSidebarContainer>
             </div>
-            <div className=" flex flex-col mt-auto border-t py-1 mb-2 bg-cyan-300">
+            <div className=" flex flex-col mt-auto border-t py-1 bg-orange-300 px-1">
                 <LowerSidebar />
             </div>
         </div>

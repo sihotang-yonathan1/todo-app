@@ -1,6 +1,6 @@
 export default function Uppersidebar(){
     return (
-        <div className="flex flex-row rounded gap-1 px-1 py-2">
+        <div className="flex flex-row rounded gap-1 px-1 py-2 bg-yellow-300">
             {/* User Photo */}
             <div className="px-2 bg-slate-500 rounded-full">
                 <p>Image</p>
