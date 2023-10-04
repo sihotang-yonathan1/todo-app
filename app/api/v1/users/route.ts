@@ -1,5 +1,4 @@
 import { createPool } from "mariadb";
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import * as dotenv from 'dotenv'
 // This code using default xampp config that may not the same as other
@@ -13,14 +12,11 @@ const pool = createPool({
     port: parseInt(process.env.DB_PORT || "3306"),
     database: process.env.DB_NAME
 })
-
-
-
-// POST is used as login check
-export async function POST(request: NextRequest){
+// PUT is used to adding new user
+export async function PUT(request: NextRequest){
     const request_body = await request.text()
     // TODO: handle request when request body not json
-    const request_json = JSON.parse(request_body) || {}
+    const request_json = JSON.parse(request_body)
 
     let response = new NextResponse(null);
 
@@ -28,19 +24,15 @@ export async function POST(request: NextRequest){
     let conn;
     try {
         conn = await pool.getConnection()
-        // TODO: hash password
         let result = await conn.query(`
-            SELECT id, username FROM user_cred
-            WHERE username = ? AND password = ?
+            INSERT INTO user_cred (username, password)
+            VALUES (?, ?)
         `, [
             request_json['username'],
             request_json['password']
         ])
-        // set userId cookie
-        cookies().set('userId', (result[0].id || -1).toString())
-        
         response = new NextResponse(JSON.stringify(result[0]))
-        await conn.end()
+        conn.end()
     }
     catch (err){
         console.error(err)
@@ -49,4 +41,30 @@ export async function POST(request: NextRequest){
         })
     }
     return response
+}
+
+export async function DELETE(request: NextRequest){
+    let response_text = await request.text()
+
+    let response_json = JSON.parse(response_text)
+    let conn;
+    try {
+        conn = await pool.getConnection()
+        await conn.query(`
+            DELETE FROM user_cred WHERE username=?
+        `, [
+            response_json['username']
+        ])
+        conn.end()
+        return NextResponse.json("ok")
+        
+    }
+    catch (err){
+        console.error(err)
+        return new NextResponse(JSON.stringify({
+            'message': 'Operation cancelled, error occured'
+        }), {
+            status: 403
+        })
+    }
 }
