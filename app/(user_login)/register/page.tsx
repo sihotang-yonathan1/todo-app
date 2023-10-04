@@ -14,9 +14,18 @@ export default function LoginPage(){
     })
     const [isPasswordVisible, setPasswordVisible] = useState(false)
 
+    function handleLoginInput(event: React.ChangeEvent<HTMLInputElement>){
+        setUserData(prev => {
+            return {
+                ...prev,
+                [event.target.name] : event.target.value
+            }
+        })
+    }
+
     function handleLogin(event: any){
         async function async_func(){
-            let response =  await fetch(`http://${API_CONFIG.host}:${API_CONFIG.port}/api/v1/login`, {
+            let response =  await fetch(`http://${API_CONFIG.host}:${API_CONFIG.port}/api/v1/users`, {
                 method: "PUT",
                 body: JSON.stringify({
                     'username': user_data.username,
@@ -61,10 +70,7 @@ export default function LoginPage(){
                         id="login-username" 
                         placeholder="Username"
                         className="rounded border px-2 py-1"
-                        onChange={event => setUserData({
-                            ...user_data,
-                            'username': event.target.value
-                        })}
+                        onChange={handleLoginInput}
                     />
                 </div>
 
@@ -79,10 +85,7 @@ export default function LoginPage(){
                                 id="login-password" 
                                 placeholder="Password"
                                 className="rounded border px-2 py-1 flex-1 min-w-0"
-                                onChange={event => setUserData({
-                                    ...user_data,
-                                    'password': event.target.value
-                                })}
+                                onChange={handleLoginInput}
                             />
                         </div>
                         
