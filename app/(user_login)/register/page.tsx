@@ -13,6 +13,11 @@ export default function LoginPage(){
         'is_authenticated': false
     })
     const [isPasswordVisible, setPasswordVisible] = useState(false)
+    const [errorInfo, setErrorInfo] = useState({
+        'is_error': false,
+        'error_message': "",
+        'error_number': 0,
+    })
 
     function handleLoginInput(event: React.ChangeEvent<HTMLInputElement>){
         setUserData(prev => {
@@ -42,6 +47,10 @@ export default function LoginPage(){
             }
             else {
                 console.error(`${response.status}-${response.statusText}`)
+                setErrorInfo(prev => ({
+                    ...prev,
+                    'is_error': true
+                }))
             }
             
         }
