@@ -39,10 +39,10 @@ function MenuSidebarContainer({children}: {children: React.ReactNode}){
     )
 }
 
-export default function Sidebar(){
+export default function Sidebar({user_id}: {user_id: string}){
     return (
         <div className="bg-[#84b5db] flex flex-col">
-            <Uppersidebar />
+            <Uppersidebar user_id={user_id}/>
             {/*  sidebar menu */}
             <div className="flex flex-col py-2">
                 <MenuSidebarContainer>
