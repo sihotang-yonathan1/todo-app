@@ -1,6 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { pool } from "../db_config/db_config";
+import { cookies } from "next/headers";
+
+export async function GET(request: NextRequest){
+    if (!cookies().has('userId')){
+        return
+    }
+    const {searchParams} = new URL(request.url)
+    const userId = cookies().get('userId')?.value
+    // Reject the request when userId is not the same as the cookie
+    if (userId !== searchParams.get('user_id')){
+        return
+    }
+    
+    // DB coonection
+    const userData = await pool.query(`
+        SELECT username FROM user_cred WHERE id = ?
+    `, [userId])
+    return (
+        new NextResponse(JSON.stringify({
+            "data": userData?.[0]
+        }))
+    )
+
+}
 
 // PUT is used to adding new user
 export async function PUT(request: NextRequest){
