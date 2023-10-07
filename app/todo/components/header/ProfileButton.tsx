@@ -1,11 +1,16 @@
+"use client"
+
+import { useContext } from "react"
 import { FiUser } from "react-icons/fi"
+import { LayoutContext } from "../../layoutContext"
 
 export function ProfileButtonInfo(){
+    const {userId} = useContext(LayoutContext)
     return (
         <div>
             <p>Profile Name</p>
             <div>
-                <p>user_id</p>
+                <p>{userId}</p>
             </div>
         </div>
     )

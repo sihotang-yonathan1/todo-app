@@ -1,8 +1,9 @@
 "use client"
 
-import React, { Suspense, useEffect, useState } from "react"
+import React, { Suspense, useContext, useEffect, useState } from "react"
 import { FiEdit, FiCheck ,FiTrash2, FiPlus } from "react-icons/fi";
 import Searchbar from "./components/content/task_container/Searchbar";
+import { LayoutContext } from "./layoutContext";
 
 type TaskInfo = {
     'id': number,
@@ -146,6 +147,8 @@ export default function TodoAppPage({user_id}: {user_id: string | number}){
     const [currentModeIndex, setCurrentModeIndex] = useState(0)
     const [isModalVisible, setModalVisibility] = useState(false)
 
+    const {userId, setUserId} = useContext(LayoutContext)
+
     function handleAddTask(event: any){
         if (currentTask){
             setTaskList(task => [...task, {
@@ -170,6 +173,10 @@ export default function TodoAppPage({user_id}: {user_id: string | number}){
     useEffect( () => {
         console.info(`data source changed to ${modeValue[currentModeIndex].name}`)
     }, [currentModeIndex])
+
+    useEffect( () => {
+        setUserId(user_id)
+    }, [user_id])
 
 
     return (

@@ -3,7 +3,6 @@ import { redirect } from "next/navigation"
 import React from "react"
 import Uppersidebar from "./sidebar/UpperSidebar"
 import LowerSidebar from "./sidebar/LowerSidebar"
-import { SidebarProvider } from "./sidebar/SidebarContext"
 
 
 function LogoutMenu(){
@@ -42,22 +41,19 @@ function MenuSidebarContainer({children}: {children: React.ReactNode}){
 
 export default function Sidebar({user_id}: {user_id: string}){
     return (
-        <SidebarProvider>
-            <div className="bg-[#84b5db] flex flex-col">
-                <Uppersidebar user_id={user_id}/>
-                {/*  sidebar menu */}
-                <div className="flex flex-col py-2">
-                    <MenuSidebarContainer>
-                        <Link href="/todo">
-                            <button type="button">Home</button>
-                        </Link>
-                    </MenuSidebarContainer>
-                </div>
-                <div className=" flex flex-col mt-auto border-t py-1 bg-orange-300 px-1">
-                    <LowerSidebar />
-                </div>
+        <div className="bg-[#84b5db] flex flex-col">
+            <Uppersidebar user_id={user_id}/>
+            {/*  sidebar menu */}
+            <div className="flex flex-col py-2">
+                <MenuSidebarContainer>
+                    <Link href="/todo">
+                        <button type="button">Home</button>
+                    </Link>
+                </MenuSidebarContainer>
             </div>
-        </SidebarProvider>
-
+            <div className=" flex flex-col mt-auto border-t py-1 bg-orange-300 px-1">
+                <LowerSidebar />
+            </div>
+        </div>
     )
 }
