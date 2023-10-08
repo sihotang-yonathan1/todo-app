@@ -78,8 +78,9 @@ export default function LoginPage(){
                         name="username" 
                         id="login-username" 
                         placeholder="Username"
-                        className="rounded border px-2 py-1"
+                        className="rounded border px-2 py-1 invalid:bg-red-300"
                         onChange={handleLoginInput}
+                        minLength={4}
                     />
                 </div>
 
@@ -93,8 +94,9 @@ export default function LoginPage(){
                                 name="password" 
                                 id="login-password" 
                                 placeholder="Password"
-                                className="rounded border px-2 py-1 flex-1 min-w-0"
+                                className="rounded border px-2 py-1 flex-1 min-w-0 invalid:bg-red-300"
                                 onChange={handleLoginInput}
+                                minLength={4}
                             />
                         </div>
                         
@@ -119,7 +121,7 @@ export default function LoginPage(){
                 </div>
             </div>
             {/* After bottom border */}
-            <div className="flex flex-row justify-center gap-1 flex-wrap">
+            <div className="flex flex-row justify-center gap-1 flex-wrap bg-indigo-100 rounded">
                 <p className="text-center text-slate-400">Already an user?
                      
                 </p>
