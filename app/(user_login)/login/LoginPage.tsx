@@ -78,7 +78,7 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                         minLength={4}
                     />
                     <div className="peer-valid:hidden peer-valid:visible mt-1">
-                        <p className="text-xs">Not enough character in username</p>
+                        <p className="text-xs">Not enough character ({user_cred?.username?.length ?? 0} / 4) in username</p>
                     </div>
                 </div>
 
