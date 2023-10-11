@@ -90,7 +90,7 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                         name="password"
                         id="login-password"
                         placeholder="Password"
-                        className="rounded border px-2 py-1 invalid:bg-red-300"
+                        className="rounded border px-2 py-1 invalid:bg-red-300 peer"
                         onChange={event => setUserCredential({
                             ...user_cred,
                             'password': event.target.value
@@ -98,6 +98,9 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                         maxLength={80}
                         minLength={4}
                     />
+                    <div className="peer-valid:hidden peer-valid:visible mt-1">
+                        <p className="text-xs">Not enough character ({user_cred?.username?.length ?? 0} / 4) in username</p>
+                    </div>
                 </div>
 
                 {/* Submit button */}
