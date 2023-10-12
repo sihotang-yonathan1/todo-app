@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { pool } from "../db_config/db_config";
 import { cookies } from "next/headers";
+import { SqlError } from "mariadb";
 
 export async function GET(request: NextRequest){
     if (!cookies().has('userId')){
@@ -47,9 +48,19 @@ export async function PUT(request: NextRequest){
     }
     catch (err){
         console.error(err)
-        response = new NextResponse(null, {
-            status: 403
-        })
+        if (err instanceof SqlError){
+            response = new NextResponse(JSON.stringify({
+                'message': err.sqlMessage,
+                'status': 403,
+                'error': {
+                    'code': err.code,
+                    'is_fatal': err.fatal,
+                    'error_number': err.errno
+                }
+            }), {
+                status: 403
+            })
+        }
     }
     return response
 }
