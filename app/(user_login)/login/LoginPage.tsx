@@ -70,7 +70,7 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                         id="login-username"
                         placeholder="Username"
                         className="rounded border px-2 py-1 invalid:bg-red-300 invalid:focus:outline invalid:focus:outline-black peer 
-                        focus:outline-green-700 focus:outline "
+                        focus:outline-green-700 focus:outline placeholder-shown:focus:outline-slate-400"
                         onChange={event => setUserCredential({
                             ...user_cred, 
                             'username': event.target.value
