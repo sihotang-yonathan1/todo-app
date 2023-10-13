@@ -41,6 +41,13 @@ export default function LoginPage({user_id}: {user_id: string | number}){
         })
     }
 
+    function handleTextInput(event: React.ChangeEvent<HTMLInputElement>){
+        setUserCredential(prev => ({
+            ...prev,
+            [event.target.name] : event.target.value
+        }))
+    }
+
     useEffect(() => {
         if (loginStatus.is_authenticated){
             // TODO: user id in multiple page
@@ -71,10 +78,7 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                         placeholder="Username"
                         className="rounded border px-2 py-1 invalid:bg-red-300 invalid:focus:outline invalid:focus:outline-black peer 
                         focus:outline-green-700 focus:outline placeholder-shown:focus:outline-slate-400"
-                        onChange={event => setUserCredential({
-                            ...user_cred, 
-                            'username': event.target.value
-                        })}
+                        onChange={handleTextInput}
                         maxLength={80}
                         minLength={4}
                     />
@@ -92,10 +96,7 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                         id="login-password"
                         placeholder="Password"
                         className="rounded border px-2 py-1 invalid:bg-red-300 peer"
-                        onChange={event => setUserCredential({
-                            ...user_cred,
-                            'password': event.target.value
-                        })}
+                        onChange={handleTextInput}
                         maxLength={80}
                         minLength={4}
                     />
