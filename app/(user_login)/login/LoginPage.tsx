@@ -61,6 +61,7 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                 <div className="flex flex-col">
                     <p className="font-semibold text-center">Sign-In</p>
                 </div>
+                {/* TODO: set error message as separate component */}
                 {loginStatus.get_error &&
                     <div className="bg-red-400 text-white px-2 mx-3">
                         {/* TODO: add error icon */}
