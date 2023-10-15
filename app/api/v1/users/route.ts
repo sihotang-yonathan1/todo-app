@@ -16,6 +16,7 @@ export async function GET(request: NextRequest){
     }
     
     // DB coonection
+    // TODO: handle DB better
     const userData = await pool.query(`
         SELECT username FROM user_cred WHERE id = ?
     `, [userId])
