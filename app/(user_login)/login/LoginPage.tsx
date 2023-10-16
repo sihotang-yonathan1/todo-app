@@ -113,6 +113,7 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                         className="
                         bg-red-400 rounded p-2 my-2 text-white capitalize
                         hover:bg-zinc-600 hover:text-slate-200
+                        shadow-md
                         "
                         onClick={handleLogin}
                     >Login</button>
@@ -125,7 +126,8 @@ export default function LoginPage({user_id}: {user_id: string | number}){
                     <button
                         type="button"
                         className="bg-green-500 p-2 border rounded text-white
-                        hover:bg-green-800 hover:text-slate-100"
+                        hover:bg-green-800 hover:text-slate-100
+                        shadow-md"
                     >Create New Account</button>
                 </Link>
             </div>
